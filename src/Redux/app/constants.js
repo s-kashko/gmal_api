@@ -1,0 +1,4 @@
+export const GET_MESSAGES = "GET_MESSAGES";
+export const SET_MESSAGE = "SET_MESSAGE";
+export const SET_MSG_IDS_ARRAY = "SET_MSG_IDS_ARRAY";
+export const GET_MESSAGES_SUCCESS = "GET_MESSAGES_SUCCESS";
