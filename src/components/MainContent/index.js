@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
 import { MAIN_CONTAINER_WIDTH } from "../../constants";
-import { selectLoading, selectMessages } from "../../redux/rowData/selectors";
+import { selectLoading, selectMessages } from "../../Redux/rowData/selectors";
 
-import Preloader from "../Preloader/Preloader";
+import Preloader from "../Preloader";
 import MessagesTable from "../MessagesTable";
+import Search from "../Search";
 
 const ContentWrapper = styled.main`
   background-color: #f2f4f8;
@@ -44,16 +45,21 @@ const loaderStyles = css`
 `;
 
 const MainContent = (props) => {
-  const { openModal } = props;
+  const { openModal, searchInput, changeSearchInput, search } = props;
 
   const loading = useSelector((state) => selectLoading(state));
   const messages = useSelector((state) => selectMessages(state));
-  
+
   return (
     <ContentWrapper>
       <AlignWrapper>
         <LeftMenu>LeftMenu</LeftMenu>
         <Content>
+          <Search
+            searchInput={searchInput}
+            changeSearchInput={changeSearchInput}
+            search={search}
+          />
           {loading ? <Preloader loaderStyles={loaderStyles} /> : <MessagesTable messages={messages} openModal={openModal} />}
         </Content>
       </AlignWrapper>

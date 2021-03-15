@@ -1,41 +1,42 @@
-
-import { useState } from 'react';
-import MessageModal from './components/MessageModal';
-
-import { authorize } from "./utils/googleApi";
+import { useState } from "react";
+import MessageModal from "./components/MessageModal";
+import { getMessagesThunk } from "./Redux/rowData/thunks";
+import { useSelector } from "react-redux";
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { api } from "./api/api";
 import Header from "./components/Header";
 import HeaderNavigation from "./components/HeaderNavigation";
 import MainContent from "./components/MainContent";
-import { getMessagesThunk } from "./redux/rowData/thunks";
+import { authorize } from "./utils/googleApi";
+import { selectSearchInput } from "./Redux/rowData/selectors";
+import { selectUserProfile } from "./Redux/userProfile/selectors";
+
+
+import { changeSearchInput } from "./Redux/rowData/actions";
 
 const App = () => {
   const [modal, setModal] = useState(null);
-  const openModal = (title, content) => setModal({title, content});
-  const closeModal = () => setModal('');
-
-  const getUserMessages = async () => {
-    try {
-      const result = await api.getAllMessages();
-      console.log("$$result: ", result);
-    } catch (err) {
-      console.log("$$error: ", err);
-    }
-  };
-
-  useEffect(() => {
-    authorize();
-  }, []);
+  const openModal = (title, content) => setModal({ title, content });
+  const closeModal = () => setModal("");
+  const searchInput = useSelector((state) => selectSearchInput(state));
+  const userProfile = useSelector((state) => selectUserProfile(state));
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMessagesThunk());
+    authorize(dispatch);
   }, []);
+
+
+  const search = () => {
+    dispatch(getMessagesThunk(userProfile.accessToken, userProfile.id, searchInput));
+  };
+
+  const changeSearchInputStr = (searchInput) => {
+    dispatch(changeSearchInput(searchInput));
+  };
 
   const AppContainer = styled.div`
     width: 100%;
@@ -48,9 +49,12 @@ const App = () => {
       <Header />
       <HeaderNavigation />
       <MainContent 
-        openModal={openModal}
+        openModal={openModal} 
+        searchInput={searchInput}
+        changeSearchInput={changeSearchInputStr}
+        search={search}
       />
-      <button onClick={getUserMessages}>get messages</button>
+      
       <MessageModal
         title={modal?.title}
         content={modal?.content}

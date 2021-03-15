@@ -1,33 +1,29 @@
-import { api } from "../../api/api";
+import { api } from "../../API/api";
 import { setErrorAC } from "../errors/actions";
 import {
   getMessages,
   getMessagesSuccess,
-  setMessageData,
+  setMessagesData,
   setMessagesIds,
 } from "./actions";
 
-export const getMessagesThunk = () => async (dispatch) => {
+export const getMessagesThunk = (accessToken, userId, str, type) => async (dispatch) => {
   try {
     dispatch(getMessages());
 
-    const response = await api.getAllMessages();
+    const response = await api.getAllMessages(accessToken, userId, str, type);
     const messagesArr = response.data.messages;
-
     dispatch(setMessagesIds(messagesArr));
-    console.log("$$messages: ", messagesArr);
-
-    messagesArr.forEach(async ({ id }) => {
-      const response = await api.getFullMessage(id);
-      dispatch(setMessageData(response.data));
-      console.log("$$full response: ", response.data);
+    
+    let requests = messagesArr.map(message => api.getFullMessage(accessToken, userId, message.id));
+    
+    Promise.all(requests).then(responses => {
+      const messages = responses.map(response => response.data);
+      dispatch(setMessagesData(messages));
     });
-
-    dispatch(getMessagesSuccess());
   } catch (err) {
     dispatch(setErrorAC(err.message));
     console.log("$$error: ", err);
-    dispatch(getMessagesSuccess());
   } finally {
     dispatch(getMessagesSuccess());
   }

@@ -52,7 +52,7 @@ const MessageRow = (props) => {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const toggle = () => setTooltipOpen(!tooltipOpen);
 
-  return (      
+  return (
     <Row onClick={()=>openModal(subject, messageHtml)}>
       <From>
         <FromContent id={`Tooltip-${message.id}`}>

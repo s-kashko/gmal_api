@@ -8,18 +8,14 @@ const instance = Axios.create({
   },
 });
 
-const accessToken =
-  "ya29.a0AfH6SMC6xFY9jWm0YvHaOZ2j_v5BIRboB817L083n4AnGUYh7RpbmhaPUmIlhJSm6dIeQPEnbcCU2DYT6X0Il8x3UUfwi7pq8MfebQFEk_H-FnUeBmHZkxsIRs-5aV14VKUdNycY0LzCn5g2A_6DhcQjUKUtbw";
-
-const userId = "114992807645259453224";
-
 export const api = {
-  getAllMessages() {
+  getAllMessages(accessToken, userId, str = '', type = "INBOX" ) {
     return instance.get(
-      `/gmail/v1/users/${userId}/messages?access_token=${accessToken}`
+      `/gmail/v1/users/${userId}/messages?labelIds=${type}&access_token=${accessToken}&q=${str}`
     );
   },
-  getFullMessage(messageId) {
+  
+  getFullMessage(accessToken, userId, messageId) {
     return instance.get(
       `/gmail/v1/users/${userId}/messages/${messageId}?access_token=${accessToken}`
     );
