@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { MAIN_CONTAINER_WIDTH } from "../constants";
+import { MAIN_CONTAINER_WIDTH } from "../../constants";
 
 const HeaderContainer = styled.header`
   height: 115px;

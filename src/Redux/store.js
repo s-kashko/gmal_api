@@ -1,11 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import ThunkMiddleware from "redux-thunk";
-import appReducer from "./app/reducer";
+import rowDataReducer from "./rowData/reducer";
 import errorsReducer from "./errors/reducer";
 
 const storeReducer = combineReducers({
-  app: appReducer,
+  rowData: rowDataReducer,
   errors: errorsReducer,
 });
 

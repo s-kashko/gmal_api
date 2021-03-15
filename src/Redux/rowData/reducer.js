@@ -8,10 +8,10 @@ import {
 const initialState = {
   loading: false,
   messagesIds: [],
-  msgDataArray: [],
+  messages: [],
 };
 
-const appReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   const { type, messageData, mgsIdsArray } = action;
 
   switch (type) {
@@ -25,11 +25,11 @@ const appReducer = (state = initialState, action) => {
       return { ...state, messagesIds: [...mgsIdsArray] };
 
     case SET_MESSAGE:
-      return { ...state, msgDataArray: [...state.msgDataArray, messageData] };
+      return { ...state, messages: [...state.messages, messageData] };
 
     default:
       return state;
   }
 };
 
-export default appReducer;
+export default reducer;

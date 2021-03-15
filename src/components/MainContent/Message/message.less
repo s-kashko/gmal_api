@@ -1,0 +1,101 @@
+@import "../../variables.less";
+
+.postsContainer {
+  .media {
+    > .pull-left {
+      padding-right: 15px;
+    }
+    margin: 26px 25px 0 30px;
+    .media-left {
+      position: relative;
+      top: 6px;
+      padding-right: 15px;
+      .media-object {
+        .img-style(60px, 60px, 3px);
+      }
+    }
+  }
+  .media-body {
+    .userInfo {
+      > span {
+        display: inline-block;
+        font: 12px Arial, sans-serif;
+        color: @gray-light;
+        &:nth-child(2) {
+          padding: 3px 13px;
+          margin-left: 25px;
+          background-color: @body-bg;
+          border-radius: 5px;
+          @media (max-width: 450px) {
+            display: none;
+          }
+        }
+      }
+      .commentsAndTime {
+        text-align: right;
+        a,
+        span {
+          font: 12px Arial, sans-serif;
+          color: @gray-light;
+          margin-right: 12px;
+          @media (max-width: 450px) {
+            margin-right: 4px;
+          }
+          .a-no-line-on-hover;
+          i {
+            font-size: 0.8em;
+            margin-right: 2px;
+            position: relative;
+            bottom: 1px;
+            .hover-color(@gray-lighter);
+          }
+        }
+        span {
+          margin-right: 0;
+        }
+      }
+    }
+    .itemName {
+      .media-heading {
+        font: bold 16px Arial, sans-serif;
+        color: #4f9cd4;
+        margin-top: 2px;
+      }
+      .status {
+        width: 12px;
+        height: 12px;
+        border-radius: 100%;
+        border: 2px solid #fdc95d;
+        margin-top: 2px;
+      }
+    }
+    > p {
+      margin: 0 30px 7px 0;
+      font: 14px Arial, sans-serif;
+      color: @gray-dark;
+    }
+    .tags {
+      .btn-tag {
+        .my-btn-style;
+        padding: 0 2px 0 0;
+        .icon-tag {
+          font-size: 0.75em;
+          color: @gray-light;
+          position: relative;
+          bottom: 1px;
+          .hover-color(@gray-lighter);
+        }
+      }
+      a {
+        font: 12px Arial, sans-serif;
+        color: @gray-light;
+        &:after {
+          content: ",";
+        }
+        &:last-child:after {
+          content: "";
+        }
+      }
+    }
+  }
+}

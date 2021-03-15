@@ -1,4 +1,5 @@
-import { api } from "../../API/api";
+import { api } from "../../api/api";
+import { setErrorAC } from "../errors/actions";
 import {
   getMessages,
   getMessagesSuccess,
@@ -24,6 +25,10 @@ export const getMessagesThunk = () => async (dispatch) => {
 
     dispatch(getMessagesSuccess());
   } catch (err) {
+    dispatch(setErrorAC(err.message));
     console.log("$$error: ", err);
+    dispatch(getMessagesSuccess());
+  } finally {
+    dispatch(getMessagesSuccess());
   }
 };

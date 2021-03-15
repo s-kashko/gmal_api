@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { MAIN_CONTAINER_WIDTH } from "../constants";
+import { MAIN_CONTAINER_WIDTH } from "../../constants";
 
 const HeaderNavWrapper = styled.nav`
   height: 40px;
@@ -18,7 +18,7 @@ const HeaderNavContent = styled.div`
 const HeaderNavigation = () => {
   return (
     <HeaderNavWrapper>
-      <HeaderNavContent>Header</HeaderNavContent>
+      <HeaderNavContent>Header Navigation</HeaderNavContent>
     </HeaderNavWrapper>
   );
 };
