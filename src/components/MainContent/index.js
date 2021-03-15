@@ -45,7 +45,7 @@ const loaderStyles = css`
 `;
 
 const MainContent = (props) => {
-  const { openModal, searchInput, changeSearchInput, search } = props;
+  const { openModal } = props;
 
   const loading = useSelector((state) => selectLoading(state));
   const messages = useSelector((state) => selectMessages(state));
@@ -55,11 +55,7 @@ const MainContent = (props) => {
       <AlignWrapper>
         <LeftMenu>LeftMenu</LeftMenu>
         <Content>
-          <Search
-            searchInput={searchInput}
-            changeSearchInput={changeSearchInput}
-            search={search}
-          />
+          <Search />
           {loading ? <Preloader loaderStyles={loaderStyles} /> : <MessagesTable messages={messages} openModal={openModal} />}
         </Content>
       </AlignWrapper>

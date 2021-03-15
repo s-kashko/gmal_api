@@ -10,9 +10,10 @@ const MessagesTable = (props) => {
 
   return (      
     <Table>
-      {!!messages?.length && messages.map(message => 
+      {!!messages?.length ? messages.map(message => 
         <MessageRow key={message.id} message={message} openModal={openModal} /> 
-      )}
+      ) : <div>Sorry, nothing found </div>
+    }
     </Table>
   );
 }

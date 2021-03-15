@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
@@ -10,6 +11,7 @@ import {
 
 import logo from "../../images/logotype@2x.png";
 
+import { selectUserName } from "../../Redux/userProfile/selectors";
 import { MAIN_CONTAINER_WIDTH } from "../../constants";
 
 const HeaderContainer = styled.header`
@@ -38,9 +40,13 @@ const Photo = styled.img`
   height: 30px;
   border-radius: 3px;
   margin: 0 15px 0 10px;
+
+  &:hover {
+    opacity: 1 !important;
+  }
 `;
 
-const PhotoLink = styled.a`
+const LogoLink = styled.a`
   display: block;
   width: fit-content;
   margin: 20px 10px;
@@ -82,17 +88,22 @@ const A = styled.a`
     color: white;
     fill: white;
     opacity: 0.7;
+  }
+
+  &:hover {
     text-decoration: none !important;
   }
 `;
 
 const Header = () => {
+  const userName = useSelector((state) => selectUserName(state));
+
   return (
     <HeaderContainer>
       <HeaderContent>
-        <PhotoLink href="#">
+        <LogoLink href="#">
           <Logo src={logo} alt="userpic" />
-        </PhotoLink>
+        </LogoLink>
         <ProfileInfo>
           <A href="#">
             <City>New York</City>
@@ -105,14 +116,14 @@ const Header = () => {
             <FAIconSize icon={faEnvelope} />
           </A>
           <A href="#">
-            <UserName>userName</UserName>
+            <UserName>{userName || "username"}</UserName>
           </A>
-          <A href="#">
+          <a href="#">
             <Photo
               src="https://lh6.googleusercontent.com/-15xTl3N0mQk/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclUxFtICxV2e47kM5Huq8K1uLQkag/s96-c/photo.jpg"
               alt="userpic"
             />
-          </A>
+          </a>
           <A href="#">
             <FAIcon icon={faSearch} />
           </A>

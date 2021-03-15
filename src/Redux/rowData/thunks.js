@@ -20,11 +20,12 @@ export const getMessagesThunk = (accessToken, userId, str, type) => async (dispa
     Promise.all(requests).then(responses => {
       const messages = responses.map(response => response.data);
       dispatch(setMessagesData(messages));
+      dispatch(getMessagesSuccess());
     });
   } catch (err) {
     dispatch(setErrorAC(err.message));
-    console.log("$$error: ", err);
-  } finally {
+    dispatch(setMessagesData([]));
     dispatch(getMessagesSuccess());
-  }
+    console.log("$$error: ", err);
+  } 
 };
