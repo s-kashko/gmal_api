@@ -10,7 +10,7 @@ const initialState = {
   loading: false,
   messagesIds: [],
   messages: [],
-  searchInput: '',
+  searchInput: "",
 };
 
 const reducer = (state = initialState, action) => {

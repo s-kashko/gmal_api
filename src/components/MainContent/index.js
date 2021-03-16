@@ -1,11 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { MAIN_CONTAINER_WIDTH } from "../../constants";
-import { selectLoading, selectMessages } from "../../Redux/rowData/selectors";
+import { selectMessages } from "../../Redux/rowData/selectors";
 
-import Preloader from "../Preloader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronRight,
+  faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
+
 import MessagesTable from "../MessagesTable";
 import Search from "../Search";
 import ContentHeader from "./ContentHeader";
@@ -30,21 +35,9 @@ const LeftMenu = styled.aside`
 `;
 
 const Content = styled.div`
-  position: relative;
   background-color: #ffffff;
   flex-grow: 1;
   border-left: 1px solid #e0e4ed;
-`;
-
-const loaderStyles = css`
-  height: 15px;
-  position: absolute;
-  top: 15%;
-  left: calc(50% - 27px);
-
-  circle {
-    fill: #565d6e;
-  }
 `;
 
 const SearchPanel = styled.div`
@@ -54,10 +47,35 @@ const SearchPanel = styled.div`
   height: 50px;
 `;
 
+const Slider = styled.div`
+  margin: 20px auto 30px;
+  text-align: center;
+`;
+
+const SliderButton = styled.button`
+  display: inline-block;
+  border: 1px solid #99a1b3;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  background-color: transparent;
+  padding: 9px 15px 9px 10px;
+  margin: 0 5px;
+  color: #2d313d;
+
+  &:hover {
+    background-color: #f2f4f8;
+  }
+  &:focus {
+    background-color: #e6e6e6;
+  }
+  &:active {
+    box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%);
+  }
+`;
+
 const MainContent = (props) => {
   const { openModal } = props;
 
-  const loading = useSelector((state) => selectLoading(state));
   const messages = useSelector((state) => selectMessages(state));
 
   return (
@@ -70,11 +88,15 @@ const MainContent = (props) => {
             <Search />
             <Options />
           </SearchPanel>
-          {loading ? (
-            <Preloader loaderStyles={loaderStyles} />
-          ) : (
-            <MessagesTable messages={messages} openModal={openModal} />
-          )}
+          <MessagesTable messages={messages} openModal={openModal} />
+          <Slider>
+            <SliderButton>
+              <FontAwesomeIcon icon={faChevronLeft} /> Previous
+            </SliderButton>
+            <SliderButton>
+              Next <FontAwesomeIcon icon={faChevronRight} />
+            </SliderButton>
+          </Slider>
         </Content>
       </AlignWrapper>
     </ContentWrapper>
