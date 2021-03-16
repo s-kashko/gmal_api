@@ -9,17 +9,18 @@ import Preloader from "../Preloader";
 import MessagesTable from "../MessagesTable";
 import Search from "../Search";
 import ContentHeader from "./ContentHeader";
+import Options from "../Search/Options";
 
 const ContentWrapper = styled.main`
-  background-color: #f2f4f8;
   display: flex;
   justify-content: center;
-  height: 100%;
+  min-height: 60vh;
 `;
 
 const AlignWrapper = styled.div`
   display: flex;
   width: ${MAIN_CONTAINER_WIDTH};
+  box-shadow: 0 0 6px 0 rgb(0 0 0 / 27%);
 `;
 
 const LeftMenu = styled.aside`
@@ -32,6 +33,7 @@ const Content = styled.div`
   position: relative;
   background-color: #ffffff;
   flex-grow: 1;
+  border-left: 1px solid #e0e4ed;
 `;
 
 const loaderStyles = css`
@@ -43,6 +45,13 @@ const loaderStyles = css`
   circle {
     fill: #565d6e;
   }
+`;
+
+const SearchPanel = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background-color: #f2f4f8;
+  height: 50px;
 `;
 
 const MainContent = (props) => {
@@ -57,7 +66,10 @@ const MainContent = (props) => {
         <LeftMenu>LeftMenu</LeftMenu>
         <Content>
           <ContentHeader />
-          <Search />
+          <SearchPanel>
+            <Search />
+            <Options />
+          </SearchPanel>
           {loading ? (
             <Preloader loaderStyles={loaderStyles} />
           ) : (

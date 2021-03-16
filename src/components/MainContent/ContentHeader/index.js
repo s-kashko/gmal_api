@@ -5,6 +5,7 @@ import CityDropdown from "../../CityDropdown";
 const HeaderBox = styled.div`
   display: flex;
   align-items: center;
+  padding: 17px 0 18px;
 `;
 
 const cityStyle = css`
@@ -12,7 +13,7 @@ const cityStyle = css`
 `;
 
 const H1 = styled.h1`
-  margin-right: 20px;
+  margin: 0 30px 0 29px;
 `;
 
 const ContentHeader = () => (

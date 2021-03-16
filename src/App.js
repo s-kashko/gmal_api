@@ -11,7 +11,7 @@ import { authorize } from "./utils/googleApi";
 const App = () => {
   const [modal, setModal] = useState(null);
   const openModal = (title, content) => setModal({ title, content });
-  const closeModal = () => setModal("");  
+  const closeModal = () => setModal("");
 
   const dispatch = useDispatch();
 
@@ -23,16 +23,15 @@ const App = () => {
     width: 100%;
     height: 100vh;
     text-align: center;
+    background-color: #f2f4f8;
   `;
 
   return (
     <AppContainer>
       <Header />
       <HeaderNavigation />
-      <MainContent 
-        openModal={openModal} 
-      />
-      
+      <MainContent openModal={openModal} />
+
       <MessageModal
         title={modal?.title}
         content={modal?.content}

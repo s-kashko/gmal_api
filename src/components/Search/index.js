@@ -11,7 +11,8 @@ import { selectUserProfile } from "../../Redux/userProfile/selectors";
 
 const SearchSection = styled.div`
   display: flex;
-  margin: 10px;
+  align-items: center;
+  margin: 5px 30px 6px;
 `;
 
 const ButtonStyled = styled.button`
@@ -19,6 +20,12 @@ const ButtonStyled = styled.button`
   right: 0;
   background: none;
   border: none;
+  color: #99a1b3;
+  font-size: 21px;
+
+  &:hover {
+    color: #b6bcc9;
+  }
 `;
 
 const SearchBox = styled.div`
@@ -26,7 +33,17 @@ const SearchBox = styled.div`
 `;
 
 const InputStyled = styled.input`
-  padding-right: 25px;
+  width: 278px;
+  height: 38px;
+  border: 1px solid #d6d9e1;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 6px 12px;
+
+  &:focus {
+    outline: none;
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(102 175 233 / 60%);
+  }
 `;
 
 const Search = () => {
