@@ -8,6 +8,7 @@ import { selectLoading, selectMessages } from "../../Redux/rowData/selectors";
 import Preloader from "../Preloader";
 import MessagesTable from "../MessagesTable";
 import Search from "../Search";
+import ContentHeader from "./ContentHeader";
 
 const ContentWrapper = styled.main`
   background-color: #f2f4f8;
@@ -55,8 +56,13 @@ const MainContent = (props) => {
       <AlignWrapper>
         <LeftMenu>LeftMenu</LeftMenu>
         <Content>
+          <ContentHeader />
           <Search />
-          {loading ? <Preloader loaderStyles={loaderStyles} /> : <MessagesTable messages={messages} openModal={openModal} />}
+          {loading ? (
+            <Preloader loaderStyles={loaderStyles} />
+          ) : (
+            <MessagesTable messages={messages} openModal={openModal} />
+          )}
         </Content>
       </AlignWrapper>
     </ContentWrapper>

@@ -1,9 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faChevronDown,
   faBell,
   faEnvelope,
   faSearch,
@@ -11,8 +10,12 @@ import {
 
 import logo from "../../images/logotype@2x.png";
 
-import { selectUserName } from "../../Redux/userProfile/selectors";
+import {
+  selectUserName,
+  selectUserEmail,
+} from "../../Redux/userProfile/selectors";
 import { MAIN_CONTAINER_WIDTH } from "../../constants";
+import CityDropdown from "../CityDropdown";
 
 const HeaderContainer = styled.header`
   height: 115px;
@@ -53,6 +56,7 @@ const LogoLink = styled.a`
 `;
 
 const ProfileInfo = styled.div`
+  display: flex;
   align-self: flex-end;
 `;
 
@@ -60,20 +64,9 @@ const FAIcon = styled(FontAwesomeIcon)`
   opacity: 0.4;
 `;
 
-const ArrowDown = styled(FAIcon)`
-  font-size: 10px;
-  margin: auto 3px;
-`;
-
 const FAIconSize = styled(FAIcon)`
   font-size: 1.2em;
   margin: 0 14px 0 10px;
-`;
-
-const City = styled.span`
-  border-bottom: 1px dashed #727989;
-  color: white;
-  opacity: 0.4;
 `;
 
 const UserName = styled.span`
@@ -95,7 +88,17 @@ const A = styled.a`
   }
 `;
 
+const cityStyle = css`
+  color: white;
+  opacity: 0.4;
+
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
 const Header = () => {
+  const userEmail = useSelector((state) => selectUserEmail(state));
   const userName = useSelector((state) => selectUserName(state));
 
   return (
@@ -105,14 +108,11 @@ const Header = () => {
           <Logo src={logo} alt="userpic" />
         </LogoLink>
         <ProfileInfo>
-          <A href="#">
-            <City>New York</City>
-            <ArrowDown icon={faChevronDown} />
-          </A>
+          <CityDropdown cityStyle={cityStyle} />
           <A href="#">
             <FAIconSize icon={faBell} />
           </A>
-          <A href="#">
+          <A href={`mailto:${userEmail}`}>
             <FAIconSize icon={faEnvelope} />
           </A>
           <A href="#">
