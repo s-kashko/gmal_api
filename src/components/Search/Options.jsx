@@ -41,11 +41,17 @@ const SlidersButton = styled.button`
   }
 `;
 
+const Span = styled.span`
+  @media (max-width: 720px) {
+    display: none;
+  }
+`;
+
 const Options = () => (
   <OptionsBlock>
     <AddItemButton>
       <PlusIcon icon={faPlus} />
-      New Item
+      <Span>New Item</Span>
     </AddItemButton>
     <SlidersButton>
       <SlidersIcon icon={faSlidersH} />

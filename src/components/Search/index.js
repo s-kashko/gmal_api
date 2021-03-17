@@ -73,7 +73,8 @@ const Search = () => {
               getMessagesThunk(
                 userProfile.accessToken,
                 userProfile.id,
-                searchInput
+                searchInput,
+                "INBOX"
               )
             );
           }}

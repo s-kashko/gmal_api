@@ -22,6 +22,10 @@ const HeaderContainer = styled.header`
   background-color: #2d313d;
   display: flex;
   justify-content: center;
+
+  @media (max-width: 720px) {
+    height: fit-content;
+  }
 `;
 
 const HeaderContent = styled.div`
@@ -30,6 +34,11 @@ const HeaderContent = styled.div`
   justify-content: space-between;
   width: ${MAIN_CONTAINER_WIDTH};
   color: white;
+
+  @media (max-width: 720px) {
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 
 const Logo = styled.img`
@@ -58,6 +67,10 @@ const LogoLink = styled.a`
 const ProfileInfo = styled.div`
   display: flex;
   align-self: flex-end;
+
+  @media (max-width: 720px) {
+    align-self: center;
+  }
 `;
 
 const FAIcon = styled(FontAwesomeIcon)`
@@ -76,6 +89,8 @@ const UserName = styled.span`
 const A = styled.a`
   color: white !important;
   text-decoration: none;
+
+  ${({ css }) => css}
 
   &:hover * {
     color: white;
@@ -97,6 +112,12 @@ const cityStyle = css`
   }
 `;
 
+const mediaNoneStyle = css`
+  @media (max-width: 720px) {
+    display: none;
+  }
+`;
+
 const Header = () => {
   const userEmail = useSelector((state) => selectUserEmail(state));
   const userName = useSelector((state) => selectUserName(state));
@@ -108,14 +129,14 @@ const Header = () => {
           <Logo src={logo} alt="userpic" />
         </LogoLink>
         <ProfileInfo>
-          <CityDropdown cityStyle={cityStyle} />
-          <A href="#">
+          <CityDropdown cityStyle={cityStyle} cityBoxStyle={mediaNoneStyle} />
+          <A href="#" css={mediaNoneStyle}>
             <FAIconSize icon={faBell} />
           </A>
-          <A href={`mailto:${userEmail}`}>
+          <A href={`mailto:${userEmail}`} css={mediaNoneStyle}>
             <FAIconSize icon={faEnvelope} />
           </A>
-          <A href="#">
+          <A href="#" css={mediaNoneStyle}>
             <UserName>{userName || "username"}</UserName>
           </A>
           <a href="#">

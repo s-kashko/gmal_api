@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { MAIN_CONTAINER_WIDTH } from "../../constants";
@@ -15,6 +15,7 @@ import MessagesTable from "../MessagesTable";
 import Search from "../Search";
 import ContentHeader from "./ContentHeader";
 import Options from "../Search/Options";
+import { setNexPageThunk, setPrevPageThunk } from "../../Redux/rowData/thunks";
 
 const ContentWrapper = styled.main`
   display: flex;
@@ -32,6 +33,10 @@ const LeftMenu = styled.aside`
   flex-shrink: 0;
   width: 171px;
   background-color: #fcfdfe;
+
+  @media (max-width: 720px) {
+    display: none;
+  }
 `;
 
 const Content = styled.div`
@@ -75,13 +80,14 @@ const SliderButton = styled.button`
 
 const MainContent = (props) => {
   const { openModal } = props;
-
   const messages = useSelector((state) => selectMessages(state));
+
+  const dispatch = useDispatch();
 
   return (
     <ContentWrapper>
       <AlignWrapper>
-        <LeftMenu>LeftMenu</LeftMenu>
+        <LeftMenu />
         <Content>
           <ContentHeader />
           <SearchPanel>
@@ -90,10 +96,10 @@ const MainContent = (props) => {
           </SearchPanel>
           <MessagesTable messages={messages} openModal={openModal} />
           <Slider>
-            <SliderButton>
+            <SliderButton onClick={() => dispatch(setPrevPageThunk())}>
               <FontAwesomeIcon icon={faChevronLeft} /> Previous
             </SliderButton>
-            <SliderButton>
+            <SliderButton onClick={() => dispatch(setNexPageThunk())}>
               Next <FontAwesomeIcon icon={faChevronRight} />
             </SliderButton>
           </Slider>

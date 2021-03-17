@@ -166,7 +166,7 @@ const MessageRow = (props) => {
 
         <TitleBlock>
           <ItemTitle onClick={() => openModal(subject, messageHtml)}>
-            Itemtitle
+            {subject || "[no subject]"}
           </ItemTitle>
         </TitleBlock>
 

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { MAIN_CONTAINER_WIDTH } from "../../constants";
+import { selectLabel } from "../../Redux/rowData/selectors";
+import { getLabeledMessages } from "../../Redux/rowData/thunks";
 
 const HeaderNavWrapper = styled.nav`
   height: 40px;
@@ -37,10 +40,12 @@ const NavItem = styled.li`
   }
 `;
 
-const messageLabels = ["Inbox", "Unread", "Important", "Spam"];
+const messageLabels = ["INBOX", "DRAFT", "TRASH", "IMPORTANT", "SPAM"];
 
 const HeaderNavigation = () => {
-  const [selectedLabel, selectLabel] = useState("Inbox");
+  const selectedLabel = useSelector((state) => selectLabel(state));
+  const dispatch = useDispatch();
+
   return (
     <HeaderNavWrapper>
       <HeaderNavContent>
@@ -48,7 +53,7 @@ const HeaderNavigation = () => {
           {messageLabels.map((label) => (
             <NavItem
               key={label}
-              onClick={() => selectLabel(label)}
+              onClick={() => dispatch(getLabeledMessages(label))}
               selected={selectedLabel === label}
             >
               {label}

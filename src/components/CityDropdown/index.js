@@ -13,6 +13,7 @@ import {
 const CityBox = styled.div`
   position: relative;
   cursor: pointer;
+  ${({ cityBoxStyle }) => cityBoxStyle}
 `;
 
 const City = styled.span`
@@ -69,12 +70,13 @@ const CityLink = styled.span`
   }
 `;
 
-const CityDropdown = ({ cityStyle }) => {
+const CityDropdown = ({ cityStyle, cityBoxStyle }) => {
   const [cityDDVisible, setCityDDVisible] = useState(false);
   const SelectedCity = useSelector((state) => selectCitySelected(state));
 
   return (
     <CityBox
+      cityBoxStyle={cityBoxStyle}
       onClick={() => setCityDDVisible(!cityDDVisible)}
       setCityDDVisible={setCityDDVisible}
     >
